@@ -71,8 +71,8 @@ function loadDataFromStorage() {
   let data = JSON.parse(serializedData);
 
   if (data !== null) {
-    for (const book of data) {
-      book.push(book);
+    for (const books of data) {
+      book.push(books);
     }
   }
 
