@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
-*, *::before, *::after {
+/* *, *::before, *::after {
     box-sizing: border-box;
 }
 
@@ -8,12 +8,16 @@ html, body {
     font-family: Raleway, sans-serif;
     margin: 0;
     padding: 0;
-}
+} */
 
 header {
     background: #066b17;
     padding: 16px;
     color: white;
+    align-items: center;
+}
+h1{
+    align-items: center;
 }
 
 .wrapper {
@@ -166,13 +170,13 @@ input[type=text], input[type=date], .btn-submit:focus {
     outline: none;
 }
 
-@media only screen and (max-width: 1024px) {
+/* @media only screen and (max-width: 500px) {
     .wrapper {
         margin: 0;
     }
 
     .wrapper .container {
-        width: 100%;
+        width: 50%;
     }
 
     .list-item {
@@ -180,6 +184,56 @@ input[type=text], input[type=date], .btn-submit:focus {
     }
 
     .form {
-        width: 100%;
+        width: 50%;
     }
-}
+} */
+/* CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Mobile styles */
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    margin: 1rem;
+  }
+  
+  .container-header {
+    font-size: 1.5rem;
+  }
+  
+  .list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Tablet styles */
+  @media screen and (min-width: 768px) {
+    .wrapper {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    .container {
+      flex: 1;
+      margin: 1rem;
+    }
+  }
+  
+  /* Desktop styles */
+  @media screen and (min-width: 1024px) {
+    .container-header {
+      font-size: 2rem;
+    }
+  }
+  

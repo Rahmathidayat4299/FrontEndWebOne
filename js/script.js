@@ -8,12 +8,12 @@ function generateId() {
   return +new Date();
 }
 
-function generatebookObject(id, task,author, timestamp, isCompleted) {
+function generatebookObject(id, title,author, year, isCompleted) {
   return {
     id,
-    task,
+    title,
     author,
-    timestamp,
+    year,
     isCompleted
   }
 }
@@ -81,18 +81,18 @@ function loadDataFromStorage() {
 
 
 function makeBook(bookObject) {
-  const {id, task,author, timestamp, isCompleted} = bookObject;
+  const {id, title,author, year, isCompleted} = bookObject;
 
   const textTitle = document.createElement('h2');
-  textTitle.innerText = task;
+  textTitle.innerText = title;
   const textAuthor = document.createElement('h2');
   textAuthor.innerText = author;
-  const textTimestamp = document.createElement('p');
-  textTimestamp.innerText = timestamp;
+  const textyear = document.createElement('p');
+  textyear.innerText = year;
 
   const textContainer = document.createElement('div');
   textContainer.classList.add('inner');
-  textContainer.append(textTitle,textAuthor, textTimestamp);
+  textContainer.append(textTitle,textAuthor, textyear);
 
   const container = document.createElement('div');
   container.classList.add('item', 'shadow')
@@ -114,14 +114,20 @@ function makeBook(bookObject) {
 
     container.append(undoButton, trashButton);
   } else {
-
+    //trash button
+    const trashButton = document.createElement('button');
+    trashButton.classList.add('trash-button');
+    trashButton.addEventListener('click', function () {
+      removeTaskFromCompleted(id);
+    });
+    //this limit
     const checkButton = document.createElement('button');
     checkButton.classList.add('check-button');
     checkButton.addEventListener('click', function () {
       addTaskToCompleted(id);
     });
 
-    container.append(checkButton);
+    container.append(checkButton,trashButton);
   }
 
   return container;
@@ -130,10 +136,10 @@ function makeBook(bookObject) {
 function addbook() {
   const textbook = document.getElementById('title').value;
   const textAuthor= document.getElementById('author').value;
-  const timestamp = document.getElementById('date').value;
+  const year = document.getElementById('date').value;
 
   const generatedID = generateId();
-  const bookObject = generatebookObject(generatedID, textbook, textAuthor,timestamp, false);
+  const bookObject = generatebookObject(generatedID, textbook, textAuthor,year, false);
   book.push(bookObject);
 
   document.dispatchEvent(new Event(RENDER_EVENT));
