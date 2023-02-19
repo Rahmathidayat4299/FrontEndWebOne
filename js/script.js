@@ -85,7 +85,7 @@ function makeBook(bookObject) {
 
   const textTitle = document.createElement('h2');
   textTitle.innerText = title;
-  const textAuthor = document.createElement('h2');
+  const textAuthor = document.createElement('h4');
   textAuthor.innerText = author;
   const textyear = document.createElement('p');
   textyear.innerText = year;
@@ -157,13 +157,24 @@ function addTaskToCompleted(bookId /* HTMLELement */) {
 }
 
 function removeTaskFromCompleted(bookId /* HTMLELement */) {
-  const bookTarget = findbookIndex(bookId);
+  const bookDelete = confirm('Apakah kamu yakin ingin menghapus buku ini?');
 
-  if (bookTarget === -1) return;
+  if (bookDelete === true) {
+    const bookTarget = findbookIndex(bookId);
 
-  book.splice(bookTarget, 1);
-  document.dispatchEvent(new Event(RENDER_EVENT));
-  saveData();
+    if (bookTarget === -1) return;
+
+    book.splice(bookTarget, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+  }
+  // const bookTarget = findbookIndex(bookId);
+
+  // if (bookTarget === -1) return;
+
+  // book.splice(bookTarget, 1);
+  // document.dispatchEvent(new Event(RENDER_EVENT));
+  // saveData();
 }
 
 function undoTaskFromCompleted(bookId /* HTMLELement */) {
@@ -179,6 +190,15 @@ function undoTaskFromCompleted(bookId /* HTMLELement */) {
 document.addEventListener('DOMContentLoaded', function () {
 
   const submitForm /* HTMLFormElement */ = document.getElementById('form');
+  const checkbox = document.getElementById('inputBookIsComplete');
+  let check = false;
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+      check = true;
+    } else {
+      check = false;
+    }
+  });
 
   submitForm.addEventListener('submit', function (event) {
     event.preventDefault();
